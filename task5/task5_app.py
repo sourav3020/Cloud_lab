@@ -8,7 +8,7 @@ db = psycopg2.connect(
     host='dpg-d0pj1qodl3ps73argvhg-a',
         database='cloud_lab_8br0',
         user='cloud_lab_8br0_user',
-        password='McBRr8DyPse7bAX7B3bzBTbWaoXNtOnt'
+        password='McBRr8DyPse7bAX7B3bzBTbWaoXNtOnt',
     port=5432
 )
 cursor = db.cursor()
