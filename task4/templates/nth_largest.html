@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Display Nth Largest Number</h1>
-    <form method="POST">
+    <form action="/nth_largest" method="POST">
         <label for="numbers">Enter numbers (comma-separated):</label>
         <input type="text" id="numbers" name="numbers" required>
         <br>
@@ -15,7 +15,7 @@
         <input type="number" id="n" name="n" required>
         <button type="submit">Submit</button>
     </form>
-    {% if nth_largest %}
+    {% if nth_largest is not none %}
         <h2>The Nth Largest Number is: {{ nth_largest }}</h2>
     {% endif %}
 </body>
