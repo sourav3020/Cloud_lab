@@ -2,6 +2,11 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
+# Root URL renders the form
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('nth_largest.html')
+
 @app.route('/nth_largest', methods=['GET', 'POST'])
 def nth_largest():
     if request.method == 'POST':
