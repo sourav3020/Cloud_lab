@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multiply Matrices</title>
+    <title>Matrix Multiplication</title>
     <style>
         /* General reset and box-sizing */
         * {
@@ -84,15 +84,16 @@
             font-size: 18px;
             color: #2ecc71;
             font-weight: bold;
-            display: none;
         }
 
         .results ul {
             list-style-type: none;
+            padding-left: 0;
         }
 
         .results ul li {
             margin: 5px 0;
+            font-size: 18px;
         }
 
         .footer {
@@ -115,7 +116,7 @@
 <body>
 
     <div class="form-container">
-        <h1>Multiply Matrices</h1>
+        <h1>Matrix Multiplication</h1>
         <form method="POST">
             <label for="matrix1">Enter Matrix 1 (comma-separated rows, e.g. 1,2,3;4,5,6):</label>
             <input type="text" id="matrix1" name="matrix1" required placeholder="Enter Matrix 1">
@@ -134,6 +135,11 @@
                     <li>{{ row }}</li>
                 {% endfor %}
             </ul>
+        </div>
+        {% elif error %}
+        <div class="results" style="color: red;">
+            <h2>Error:</h2>
+            <p>{{ error }}</p>
         </div>
         {% endif %}
 
