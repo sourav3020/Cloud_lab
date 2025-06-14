@@ -19,6 +19,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
 
         .form-container {
@@ -28,10 +29,10 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
+            text-align: center;
         }
 
         h1 {
-            text-align: center;
             color: #333;
             margin-bottom: 20px;
             font-size: 24px;
@@ -75,11 +76,32 @@
             background-color: #2980b9;
         }
 
+        /* Success Message Styling */
         .response-message {
-            text-align: center;
             margin-top: 20px;
-            color: #2ecc71;
+            padding: 15px;
+            background-color: #2ecc71;
+            color: white;
+            border-radius: 6px;
             font-size: 18px;
+            font-weight: bold;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            animation: showSuccess 3s forwards;
+        }
+
+        /* Animation for the success message */
+        @keyframes showSuccess {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .form-footer {
@@ -97,7 +119,6 @@
         .form-footer a:hover {
             text-decoration: underline;
         }
-
     </style>
 </head>
 <body>
@@ -113,9 +134,8 @@
             <button type="submit">Submit</button>
         </form>
 
-        <div class="response-message">
-            <!-- Here, you can display the success message when validation is successful -->
-            <p id="response-message"></p>
+        <div class="response-message" id="response-message">
+            <!-- Success message will appear here -->
         </div>
 
         <div class="form-footer">
@@ -124,11 +144,13 @@
     </div>
 
     <script>
-        // Handle the response message dynamically
+        // Handle the success message
         const responseMessage = document.getElementById('response-message');
         const urlParams = new URLSearchParams(window.location.search);
+
         if (urlParams.has('message')) {
             responseMessage.textContent = urlParams.get('message');
+            responseMessage.style.opacity = 1; // Show the message after fetching
         }
     </script>
 </body>
