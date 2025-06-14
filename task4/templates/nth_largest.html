@@ -3,17 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multiply Matrices</title>
+    <title>Find nth Largest Number</title>
     <style>
-        /* General reset and box-sizing */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #f5f7fa;
             display: flex;
             justify-content: center;
@@ -21,51 +14,34 @@
             height: 100vh;
             margin: 0;
         }
-
         .form-container {
-            background-color: #ffffff;
+            background-color: white;
             padding: 40px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 700px;
+            max-width: 500px;
             text-align: center;
-            overflow: hidden;
         }
-
         h1 {
-            color: #333;
+            font-size: 28px;
             margin-bottom: 20px;
-            font-size: 32px;
-            font-weight: bold;
         }
-
         label {
             font-size: 16px;
             color: #555;
-            margin-bottom: 12px;
             display: block;
-            text-align: left;
+            margin-bottom: 10px;
             font-weight: bold;
         }
-
-        input[type="text"] {
+        input[type="text"], input[type="number"] {
             width: 100%;
             padding: 12px;
             margin-bottom: 20px;
             border: 1px solid #ddd;
             border-radius: 6px;
             font-size: 16px;
-            transition: border-color 0.3s ease;
-            background-color: #f8f8f8;
         }
-
-        input[type="text"]:focus {
-            border-color: #3498db;
-            outline: none;
-            background-color: #fff;
-        }
-
         button {
             width: 100%;
             padding: 14px;
@@ -75,14 +51,11 @@
             border-radius: 6px;
             font-size: 18px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
         }
-
         button:hover {
             background-color: #2980b9;
         }
-
-        .results {
+        .result {
             margin-top: 20px;
             padding: 20px;
             background-color: #eaf7f3;
@@ -90,81 +63,43 @@
             font-size: 18px;
             color: #2ecc71;
             font-weight: bold;
-            display: none;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
-
-        .results ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .results ul li {
-            margin: 10px 0;
+        .error {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9c2c2;
+            border-radius: 6px;
             font-size: 18px;
+            color: #e74c3c;
+            font-weight: bold;
         }
-
-        .footer {
-            margin-top: 30px;
-            font-size: 14px;
-            color: #777;
-            text-align: center;
-        }
-
-        .footer a {
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            .form-container {
-                padding: 20px;
-            }
-
-            h1 {
-                font-size: 26px;
-            }
-
-            label, input[type="text"], button {
-                font-size: 14px;
-            }
-        }
-
     </style>
 </head>
 <body>
 
     <div class="form-container">
-        <h1>Multiply Matrices</h1>
+        <h1>Find nth Largest Number</h1>
         <form method="POST">
-            <label for="matrix1">Enter Matrix 1 (comma-separated rows, e.g. 1,2,3;4,5,6):</label>
-            <input type="text" id="matrix1" name="matrix1" required placeholder="Enter Matrix 1">
-            
-            <label for="matrix2">Enter Matrix 2 (comma-separated rows, e.g. 7,8,9;10,11,12):</label>
-            <input type="text" id="matrix2" name="matrix2" required placeholder="Enter Matrix 2">
-            
-            <button type="submit">Multiply</button>
+            <label for="numbers">Enter numbers (comma-separated):</label>
+            <input type="text" id="numbers" name="numbers" required placeholder="e.g. 5, 10, 15, 20">
+
+            <label for="n">Enter n (position of largest number):</label>
+            <input type="number" id="n" name="n" required min="1" placeholder="Enter a number">
+
+            <button type="submit">Find nth Largest</button>
         </form>
 
-        {% if result %}
-        <div class="results" style="display: block;">
+        {% if nth_largest is not none %}
+        <div class="result">
             <h2>Result:</h2>
-            <ul>
-                {% for row in result %}
-                    <li>{{ row }}</li>
-                {% endfor %}
-            </ul>
+            <p>The {{ n }}th largest number is: {{ nth_largest }}</p>
+        </div>
+        {% elif error %}
+        <div class="error">
+            <h2>Error:</h2>
+            <p>{{ error }}</p>
         </div>
         {% endif %}
-
-        <div class="footer">
-            <p>Need help? <a href="#">Contact Us</a></p>
-        </div>
     </div>
 
 </body>
