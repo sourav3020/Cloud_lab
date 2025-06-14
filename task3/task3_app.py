@@ -24,16 +24,21 @@ def validate_user():
     username = request.form['username']
     password = request.form['password']
 
-    # Insert user data into PostgreSQL
+    # Check if the user exists in the database
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute("CREATE TABLE IF NOT EXISTS users (username VARCHAR(50), password VARCHAR(50));")
-    cur.execute("INSERT INTO users (username, password) VALUES (%s, %s);", (username, password))
-    conn.commit()
+    
+    # Query to check if the user exists
+    cur.execute("SELECT * FROM users WHERE username = %s AND password = %s", (username, password))
+    user = cur.fetchone()
+
     cur.close()
     conn.close()
 
-    return 'User validated and stored in the database.'
+    if user:
+        return 'User validated successfully.'
+    else:
+        return 'Invalid username or password.'
 
 if __name__ == '__main__':
     app.run(debug=True)
