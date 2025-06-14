@@ -7,25 +7,27 @@ app = Flask(__name__)
 def index():
     return render_template('nth_largest.html')
 
-@app.route('/nth_largest', methods=['GET', 'POST'])
+@app.route('/nth_largest', methods=['GET', 'POST'])  # Ensure POST is allowed here
 def nth_largest():
-    nth_largest = None
-    error = None
+    nth_largest = None  # Default to None if no result
+    error = None  # Default to no error
     if request.method == 'POST':
         try:
             # Get numbers from form and convert them into a list of integers
             numbers = list(map(int, request.form['numbers'].split(',')))
             n = int(request.form['n'])
-            
-            # Check if n is within bounds of the list
-            if n > len(numbers) or n <= 0:
+
+            # Sort numbers in descending order
+            sorted_numbers = sorted(numbers, reverse=True)
+
+            # Check if n is valid
+            if n > len(numbers) or n < 1:
                 error = "Error: n is greater than the length of the list or less than 1."
                 nth_largest = None
             else:
-                # Sort numbers in descending order
-                sorted_numbers = sorted(numbers, reverse=True)
+                # Get the nth largest number
                 nth_largest = sorted_numbers[n - 1]
-        
+
         except ValueError:
             error = "Invalid input. Please make sure the input is in the correct format."
             nth_largest = None
